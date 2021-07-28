@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: test api call
-        run: echo ${{ github.event.client_payload.version }}
+        run: echo ' DATA! ${{ github.event.client_payload.version }}'
