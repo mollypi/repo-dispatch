@@ -10,4 +10,4 @@ jobs:
       STUFF: '${{ github.event.client_payload.version }}'
     steps:
       - name: test
-        run: echo $STUFF
+        run: 'echo "field: ${{ github.event.client_payload.version }}"'
