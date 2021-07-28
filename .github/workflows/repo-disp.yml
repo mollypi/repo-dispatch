@@ -1,10 +1,9 @@
 name: Repository Dispatch
 on:
   repository_dispatch:
-    types: [my-event]
+    types:
+      - my-event
 jobs:
   myEvent:
     runs-on: ubuntu-latest
-    steps:
-      - name: test api call
-        run: echo ' DATA! ${{ github.event.client_payload.version }}'
+    run: echo  '${{ toJson(github.event.client_payload) }}'
