@@ -6,4 +6,8 @@ on:
 jobs:
   myEvent:
     runs-on: ubuntu-latest
-    run: echo  '${{ toJson(github.event.client_payload) }}'
+    env:
+      STUFF: '${{ toJson(github.event.client_payload) }}'
+    steps:
+      - name: test
+        run: echo $STUFF
