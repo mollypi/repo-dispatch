@@ -1,18 +1,15 @@
-name: Labeler
-on: [pull_request]
+name: "Pull Request Labeler"
+on:
+- pull_request
 
 jobs:
-  label:
-
+  triage:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
-
     steps:
     - uses: actions/labeler@v3
-      # Add 'repo' label to any root file changes
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
     repo:
     - '*'
 
