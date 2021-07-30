@@ -1,10 +1,22 @@
-name: Repository Dispatch
+name: testdispatch
+
 on:
-  repository_dispatch:
-    types: [my-event]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'code version'
+        required: false
+        default: '5.14.0'
+      buildnum:
+        description: 'buildnum to deploy to qa'
+        required: true   
 jobs:
-  myEvent:
+  updateqa:
     runs-on: ubuntu-latest
+    env:
+      DOCKER_GCP_PROJECT: gcp-dev-ops
+      IMAGETAG: ${{ github.event.inputs.version }}.${{ github.event.inputs.buildnum }}
+      VERSION: ${{ github.event.inputs.version }}
     steps:
-      - name: test api call
-        run: echo ${{ github.event.client_payload}}
+     - name: check 
+       run: echo 'DISPATCHED!'
