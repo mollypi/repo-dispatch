@@ -18,13 +18,7 @@ jobs:
       IMAGETAG: ${{ github.event.inputs.version }}.${{ github.event.inputs.buildnum }}
       VERSION: ${{ github.event.inputs.version }}
     steps:
-     - name: check 
-       uses: actions/checkout@v2
-       with:
-         ref: ${{ github.sha }}
-
-     - name: cat out readme
-       run: cat ./README.md
-     
      - name: check for choco
-       run: choco /?
+       run: choco install visualstudio2017buildtools
+     - name: find path
+       run: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\MSBuild.exe'
