@@ -12,7 +12,7 @@ on:
         required: true   
 jobs:
   updateqa:
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
     env:
       DOCKER_GCP_PROJECT: gcp-dev-ops
       IMAGETAG: ${{ github.event.inputs.version }}.${{ github.event.inputs.buildnum }}
@@ -25,3 +25,6 @@ jobs:
 
      - name: cat out readme
        run: cat ./README.md
+     
+     - name: check for choco
+       run: choco /?
