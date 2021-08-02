@@ -21,7 +21,8 @@ jobs:
      - name: check for choco
        run: choco install visualstudio2017buildtools -y 
      - name: find path
-       run: set msbuild2017="C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\MSBuild.exe"
-       shell: cmd
+       run: echo msbuild2017="C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\MSBuild.exe" >> GITHUB_ENV
+
      - name: use msbuild
-       run: msbuild2017 //version
+       run: ${{ env.msbuild2017 }} /version
+       shell: cmd
