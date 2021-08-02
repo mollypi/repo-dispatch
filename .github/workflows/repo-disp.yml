@@ -19,4 +19,8 @@ jobs:
       VERSION: ${{ github.event.inputs.version }}
     steps:
      - name: check 
-       run: echo 'DISPATCHED!'
+       uses: actions/checkout@v2
+       with:
+         ref: $GITHUB_SHA
+
+       run: cat ./README.md
