@@ -21,7 +21,7 @@ jobs:
      - name: check 
        uses: actions/checkout@v2
        with:
-         ref: $GITHUB_SHA
+         ref: ${{ github.sha }}
 
      - name: cat out readme
        run: cat ./README.md
