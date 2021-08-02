@@ -21,4 +21,4 @@ jobs:
      - name: check for choco
        run: choco install visualstudio2017buildtools -y 
      - name: find path
-       run: '"'C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\MSBuild.exe'"'
+       run: \"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\MSBuild.exe\" 
