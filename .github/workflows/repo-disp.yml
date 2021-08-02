@@ -23,5 +23,6 @@ jobs:
      - name: find path
        run: set msbuild2017="C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\MSBuild.exe"
        shell: cmd
-     
+     - name: use msbuild
+       run: $msbuild2017 /version
 
