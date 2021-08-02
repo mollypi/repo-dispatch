@@ -23,4 +23,5 @@ jobs:
        with:
          ref: $GITHUB_SHA
 
+     - name: cat out readme
        run: cat ./README.md
