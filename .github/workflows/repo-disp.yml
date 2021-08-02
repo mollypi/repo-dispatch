@@ -25,4 +25,4 @@ jobs:
        shell: cmd
      - name: use msbuild
        run: $msbuild2017 /version
-
+       shell: cmd
