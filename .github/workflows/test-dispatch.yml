@@ -1,0 +1,12 @@
+name: testing repo dispatch
+
+on: 
+  repository_dispatch:
+  types: [ my-event ]
+  
+jobs:
+  test-run:
+    runs-on: ubuntu-latest
+  steps:
+    - name: check
+      run: echo "HI"
