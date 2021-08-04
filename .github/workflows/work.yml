@@ -1,3 +1,5 @@
+
+
 name: testdispatch
 
 on:
@@ -11,8 +13,8 @@ on:
         description: 'buildnum to deploy to qa'
         required: true   
 jobs:
-  updateqa:
+  dispatch:
     runs-on: ubuntu-latest
-     steps:
-       - name: check input
-         run: echo ${{ github.event.inputs.buildnum }}
+    steps:
+      - name: echo success
+        run: echo ${{ github.event.inputs.buildnum }}
