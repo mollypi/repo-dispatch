@@ -12,17 +12,7 @@ on:
         required: true   
 jobs:
   updateqa:
-    runs-on: windows-2019
-    env:
-      DOCKER_GCP_PROJECT: gcp-dev-ops
-      IMAGETAG: ${{ github.event.inputs.version }}.${{ github.event.inputs.buildnum }}
-      VERSION: ${{ github.event.inputs.version }}
-    steps:
-     - name: check for choco
-       run: choco install visualstudio2017buildtools -y 
-     - name: find path
-       run: echo msbuild2017="C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\MSBuild.exe" >> GITHUB_ENV
-
-     - name: use msbuild
-       run: ${{ env.msbuild2017 }} /version
-       shell: cmd
+    runs-on: ubuntu-latest
+     steps:
+     - name: check input
+       run: echo ${{ github.event.inputs.buildnum }}
