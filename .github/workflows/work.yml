@@ -14,5 +14,5 @@ jobs:
   updateqa:
     runs-on: ubuntu-latest
      steps:
-     - name: check input
-       run: echo ${{ github.event.inputs.buildnum }}
+       - name: check input
+         run: echo ${{ github.event.inputs.buildnum }}
