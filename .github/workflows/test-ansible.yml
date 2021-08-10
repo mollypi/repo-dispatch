@@ -1,10 +1,11 @@
-name: test ansible
+name: testdispatch
 
-on: 
+on:
   workflow_dispatch
   
-jobs: test-ansible
-  runs-on: ubuntu-latest
-  steps:
-    - name: is ansible present?
-      run: ansible --version
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: is ansible present?
+        run: ansible --version
