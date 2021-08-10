@@ -1,4 +1,8 @@
-name: test ansible 
+name: test ansible
+
+on: 
+  workflow_dispatch
+  
 jobs: test-ansible
   runs-on: ubuntu-latest
   steps:
