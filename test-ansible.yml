@@ -1,0 +1,6 @@
+name: test ansible 
+jobs: test-ansible
+  runs-on: ubuntu-latest
+  steps:
+    - name: is ansible present?
+      run: ansible --version
