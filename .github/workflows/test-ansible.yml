@@ -1,4 +1,4 @@
-name: testdispatch
+name: test-ansible
 
 on:
   workflow_dispatch
@@ -9,3 +9,6 @@ jobs:
     steps:
       - name: is ansible present?
         run: ansible --version
+      
+      - name: import from galaxy
+        run: ansible-galaxy collection install community.google
