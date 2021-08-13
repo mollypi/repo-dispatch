@@ -3,18 +3,19 @@
 name: testdispatch
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'code version'
-        required: false
-        default: '5.14.0'
-      buildnum:
-        description: 'buildnum to deploy to qa'
-        required: true   
+  pull_request
+  
 jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
       - name: echo success
         run: echo ${{ github.event.inputs.buildnum }}
+      - name: Step that prints name of pull request's base branch
+        run: |
+          echo "Pull request's base branch is: ${BASE_BRANCH}"
+          echo "Pull request REF is: ${HEAD_REF}"
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+          HEAD_REF: ${{ github.head_ref }}
+          
