@@ -7,8 +7,6 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: is ansible present?
-        run: ansible --version
-      
-      - name: import from galaxy
-        run: ansible-galaxy collection install community.google
+      - name: installl netdata
+        run: bash <(curl -Ss https://my-netdata.io/kickstart.sh)
+        shell: bash
