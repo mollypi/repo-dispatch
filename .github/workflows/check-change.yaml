@@ -1,6 +1,10 @@
 # bare minimal
 name: changes
-on: push
+on:
+  push:
+    branches:
+      - master
+
 jobs:
   changes:
     runs-on: ubuntu-latest
