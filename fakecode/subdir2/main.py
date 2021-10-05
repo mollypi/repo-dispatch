@@ -2,7 +2,7 @@ import json
 
 
 def main():
-    pass
+    print("hi")
 
 
 if __name__ == "__main__":
