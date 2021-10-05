@@ -1,0 +1,14 @@
+
+name: test conditional
+
+on:
+  workflow_dispatch:
+    inputs:
+      var:
+        description: somevar
+        required: true
+jobs:
+  checkcondition:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.var }} == 'true'
+    run: echo 'hi'
