@@ -1,9 +1,7 @@
 
 name: file change detect
-on:
-  push:
-    branches:
-      - master
+on: pull_request
+
 jobs:
   auto-pull-request:
     name: Release Pull Request
