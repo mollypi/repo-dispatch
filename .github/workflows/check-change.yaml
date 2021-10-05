@@ -1,9 +1,13 @@
-# bare minimal
-name: changes
-on: push
+
+name: file change detect
+on: [pull_request, push]
+
 jobs:
-  changes:
+  build:
     runs-on: ubuntu-latest
     steps:
       - id: file_changes
-        uses: trilom/file-changes-action@v1.2.3
+        uses: trilom/file-changes-action@v1.2.4
+        with:
+          output: ","
+      - run: echo "${{ steps.file_changes.outputs.files }}"
