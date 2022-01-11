@@ -36,6 +36,6 @@ jobs:
       - name: tag
         uses: actions-ecosystem/action-push-tag@v1
         with:
-          tag: $IMAGE_TAG
-          message: '${IMAGE_TAG}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
+          tag:  ${{ github.event.inputs.version }}.${{ github.event.inputs.buildnum }}
+          message: ' ${{ github.event.inputs.version }}.${{ github.event.inputs.buildnum }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
         
