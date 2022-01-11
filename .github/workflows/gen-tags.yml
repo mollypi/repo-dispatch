@@ -1,4 +1,4 @@
-name: gcr_docker_push_on_merge
+name: gentags
 on:
   workflow_dispatch:
     inputs:
@@ -33,5 +33,8 @@ jobs:
         with:
           ref: ${{ github.event.inputs.gitsha }}
       - name: tag
-        run: git tag -a $IMAGETAG $SHACOMMIT
+        uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: $IMAGE_TAG
+          message: '$IMAGE_TAG: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
         
