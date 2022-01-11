@@ -32,6 +32,6 @@ jobs:
       - name: Trigger workflow on success
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: tag-with-build-num
+          workflow: tag-with-buildnum
           token: ${{ secrets.DISPATCH_TOKEN }}
           inputs: '{ "buildnum": "${{ github.event.inputs.buildnum }}", "version": "${{ github.event.inputs.version }}", "gitsha": "${{ github.event.inputs.gitsha }}" }'
