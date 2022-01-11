@@ -1,0 +1,37 @@
+name: testing
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: code version for docker build ie 5.14.0,5.14.2...
+        required: true
+      buildnum:
+        description: build number in jenkins (TEMP)
+        required: true 
+      gitsha:
+        description: the git commit sha of the binary build
+        required: true
+
+jobs:
+  buildcontainers:
+    runs-on: ubuntu-latest
+    env: 
+      BUILDNUM: ${{ github.event.inputs.buildnum }}
+      IMAGETAG: ${{ github.event.inputs.version }}.${{ github.event.inputs.buildnum }}
+      VERSION: ${{ github.event.inputs.version }}
+      SHACOMMIT: ${{ github.event.inputs.gitsha }}
+
+    
+    steps:
+        
+      - name: checkout code 
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.gitsha }}
+
+      - name: Trigger workflow on success
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: tag-with-build-num
+          token: ${{ secrets.DISPATCH_TOKEN }}
+          inputs: '{ "buildnum": "${{ github.event.inputs.buildnum }}", "version": "${{ github.event.inputs.version }}", "gitsha": "${{ github.event.inputs.gitsha }}" }'
