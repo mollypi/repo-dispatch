@@ -1,4 +1,4 @@
-name: gentags
+name: tag-with-buildnum
 on:
   workflow_dispatch:
     inputs:
