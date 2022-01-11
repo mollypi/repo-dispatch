@@ -32,9 +32,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.inputs.gitsha }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: tag
         uses: actions-ecosystem/action-push-tag@v1
         with:
           tag: $IMAGE_TAG
-          message: '$IMAGE_TAG: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
+          message: '${IMAGE_TAG}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
         
