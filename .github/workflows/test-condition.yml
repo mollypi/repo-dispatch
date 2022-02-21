@@ -6,7 +6,7 @@ on:
 
 jobs:
   run_if:
-    if:  startsWith(github.head_ref, 'molly')
+    if:  startsWith(github.head_ref, 'molly') || contains(github.head_ref, 'something')
     runs-on: ubuntu-latest
     env: 
       PROJECT: cto-sic-annotation-tool-d
