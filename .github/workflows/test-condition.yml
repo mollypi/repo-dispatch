@@ -4,7 +4,7 @@ on:
 
 jobs:
   run_if:
-    if:  ${{ !startsWith(github.head_ref, 'molly') }}
+    if: "!startsWith(github.head_ref, 'molly')"
     runs-on: ubuntu-latest
     env: 
       PROJECT: cto-sic-annotation-tool-d
