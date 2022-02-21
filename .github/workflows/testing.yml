@@ -1,17 +1,31 @@
-name: pull request comment
+name: Deploy
+
 on:
-  issue_comment:                                     
-    types: [created, edited]
+  issue_comment:
+    types:
+    - created
 
 jobs:
- job01:
-   runs-on: ubuntu-latest
-   steps:
-     - name: say hello
-       if: contains(github.event.comment.body, '/support')   # check the comment if it contains the keywords
-       run: |
-         echo say hello
-     - name: test
-       if: contains(github.event.comment.body, '/test')  # check the comment if it contains the keywords
-       run: |
-         echo test
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.issue.pull_request && github.event.comment.body == '/deploy'}}
+    steps:
+    - name: Get PR SHA
+      id: sha
+      uses: actions/github-script@v4
+      with:
+        result-encoding: string
+        script: |
+          const { owner, repo, number } = context.issue;
+          const pr = await github.pulls.get({
+            owner,
+            repo,
+            pull_number: number,
+          });
+          return pr.data.head.sha          
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ steps.sha.outputs.result }}
+    - name: Run deployment
+      run: echo "hi"
