@@ -4,7 +4,7 @@ on:
 
 jobs:
   run_if:
-    if:  contains(github.head_ref, 'molly') || contains(github.head_ref, 'something')
+    if:  ${{ !contains(github.head_ref, 'molly') }} || ${{ !contains(github.head_ref, 'something') }}
     runs-on: ubuntu-latest
     env: 
       PROJECT: cto-sic-annotation-tool-d
