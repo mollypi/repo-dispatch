@@ -1,0 +1,17 @@
+on:
+  pull_request:
+    types:
+      - opened
+    
+
+jobs:
+  run_if:
+    if:  startsWith(!github.head_ref, 'molly')
+    runs-on: ubuntu-latest
+    env: 
+      PROJECT: cto-sic-annotation-tool-d
+      APPENV: staging
+    steps:
+    - name: get base
+      run: |
+            echo  ${{ github.base_ref }}
