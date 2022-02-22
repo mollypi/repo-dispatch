@@ -1,14 +1,14 @@
-name: Deploy
+name: Deploy on PR comment
 
 on:
   issue_comment:
     types:
-    - created
+      - created
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.issue.pull_request && github.event.comment.body == '/deploy'}}
+    if: ${{ github.event.issue.pull_request && github.event.comment.body == '/deploy' }}
     steps:
     - name: Get PR SHA
       id: sha
@@ -22,9 +22,44 @@ jobs:
             repo,
             pull_number: number,
           });
-          return pr.data.head.sha          
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ steps.sha.outputs.result }}
-      - name: Run deployment
-        run: echo "Hello"
+          return pr.data.head.sha
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ steps.sha.outputs.result }}
+    - name: React to comment
+      uses: actions/github-script@v4
+      with:
+        script: |
+          const {owner, repo} = context.issue;
+          github.reactions.createForIssueComment({
+            owner,
+            repo,
+            comment_id: context.payload.comment.id,
+            content: "rocket",
+          });
+    - name: Fail randomly
+      run: |
+        cat README.md
+        exit $((RANDOM % 2))
+    - name: Message success
+      if: ${{ success() }}
+      uses: actions/github-script@v4
+      with:
+        script: |
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: 'Deployment succeeded! ✅',
+          });
+    - name: Message failure
+      if: ${{ failure() }}
+      uses: actions/github-script@v4
+      with:
+        script: |
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: 'Deployment failed! ❌',
+          });
