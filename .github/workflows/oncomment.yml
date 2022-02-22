@@ -35,7 +35,7 @@ jobs:
             owner,
             repo,
             comment_id: context.payload.comment.id,
-            content: "deployment started",
+            content: "+1",
           });
 
     - name: Message success
