@@ -19,3 +19,6 @@ jobs:
 
       - name: debug output 
         run: echo ${{ steps.short-sha.outputs.sha }}
+      
+      - name: use output
+        run: echo 'stage-${{ steps.short-sha.outputs.sha }}'
