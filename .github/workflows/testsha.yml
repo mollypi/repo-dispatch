@@ -8,10 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: checkout code 
-        uses: actions/checkout@v2
+    - name: checkout code 
+      uses: actions/checkout@v2
+
+    - name: Sets env vars for release
+      run: |
+        echo "appenv=production" >> $GITHUB_ENV
+      if: github.event.comment.body == '/deployproduction'
+
+    - name: default vars to stage 
+      run: echo "appenv=staging" >> $GITHUB_ENV
       
-      - name: Get current tag
-        id: get-current-tag
-        run: echo ${{ github.ref }} 
+    - name: debug stuff
+      run: echo $appenv
 
