@@ -1,41 +1,19 @@
-name: tag-with-buildnum
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: code version for docker build ie 5.14.0,5.14.2...
-        required: true
-      buildnum:
-        description: build number in jenkins (TEMP)
-        required: true 
-      gitsha:
-        description: the git commit sha of the binary build
-        required: true
+  issue_comment:
+    types:
+      - created
 
 jobs:
-  buildcontainers:
+  build:
     runs-on: ubuntu-latest
-    env: 
-      DOCKER_GCP_PROJECT: gcp-dev-ops
-      BUILDNUM: ${{ github.event.inputs.buildnum }}
-      IMAGETAG: ${{ github.event.inputs.version }}.${{ github.event.inputs.buildnum }}
-      VERSION: ${{ github.event.inputs.version }}
-      SHACOMMIT: ${{ github.event.inputs.gitsha }}
-
-    
     steps:
-      
-      - name: checkvar
-        run: echo $BUILDNUM
-        
-      - name: checkout code 
-        uses: actions/checkout@v2
+      - name: Create/Update the tag
+        uses: julb/action-manage-tag@v1
         with:
-          ref: ${{ github.event.inputs.gitsha }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: tag
-        uses: actions-ecosystem/action-push-tag@v1
-        with:
-          tag:  ${{ github.event.inputs.version }}.${{ github.event.inputs.buildnum }}
-          message: ' ${{ github.event.inputs.version }}.${{ github.event.inputs.buildnum }}: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.title }}'
-        
+          name: tag-name
+          state: present
+          from: ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: checj ref
+        run: echo ${{ github.ref }}
