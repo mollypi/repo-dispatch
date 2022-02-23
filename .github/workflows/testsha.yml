@@ -20,5 +20,5 @@ jobs:
       run: echo "appenv=staging" >> $GITHUB_ENV
       
     - name: debug stuff
-      run: echo $appenv
+      run: echo "GITHUB_SHA: ${GITHUB_SHA}"
 
