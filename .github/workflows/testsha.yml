@@ -13,6 +13,5 @@ jobs:
       
       - name: Get current tag
         id: get-current-tag
-        uses: zingimmick/github-action-get-current-tag@v1
-      - name: Print tag
-        run: echo ${{steps.get-current-tag.outputs.tag}}
+        run: echo ${{ github.ref }} 
+
