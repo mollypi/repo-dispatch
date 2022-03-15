@@ -7,24 +7,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # windows-latest | macos-latest
-    strategy:
-      matrix:
-        files: ["file.txt", "fakecode"]
-    name: Test changed-files
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
 
-      - name: Get changed files
-        id: changed-files
+      - name: Get specific changed files
+        id: changed-files-specific
         uses: tj-actions/changed-files@v18.1
+        with:
+          files: |
+            fakecode
 
-      - name: List all changed files
+      - name: Run step if any of the listed files above change
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-            if [[ "$file" == *"${{ matrix.files }}"* ]]; then
-            echo "It's there."
-          fi
-          done
+          echo "One or more files listed above has changed."
+
