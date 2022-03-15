@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # windows-latest | macos-latest
+    strategy:
+      matrix:
+        files: ["file.txt", "fakecode"]
     name: Test changed-files
     steps:
       - uses: actions/checkout@v2
@@ -21,4 +24,7 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
+            if [[ "$file" == *"${{ matrix.files }}"* ]]; then
+            echo "It's there."
+          fi
           done
