@@ -12,5 +12,5 @@ jobs:
         shell: bash
 
       - name: debug
-        run: echo `ls -al`
+        run: cat .env
         shell: bash
