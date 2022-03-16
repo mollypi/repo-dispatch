@@ -13,11 +13,10 @@ jobs:
           version: '290.0.1'
           service_account_key: ${{ secrets.GCP_DEV_OPS }}
           project_id: gcp-dev-ops
-          export_default_credentials: true
 
-      - name: test gsutil
-        run: gsutil cp gs://testbucket-molly/TEST .env
+#       - name: test gsutil
+#         run: gsutil cp gs://testbucket-molly/TEST .env
       
-      - name: debug
-        run: |
-          ls -al ${{ github.workspace }}
+#       - name: debug
+#         run: |
+#           ls -al ${{ github.workspace }}
