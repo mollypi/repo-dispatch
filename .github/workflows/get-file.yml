@@ -1,0 +1,16 @@
+name: get-file
+
+on:
+  workflow_dispatch
+  
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: write out file
+        run: echo "${{ secrets.ENV_FILE }} > .env"
+        shell: bash
+
+      - name: debug
+        run: echo `ls -al`
+        shell: bash
