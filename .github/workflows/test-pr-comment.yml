@@ -3,15 +3,13 @@ on:
   
   
 jobs:
-  build:
-    runs-on: ubuntu-latest  
-    env:
-      GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
+  comment:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: create a file
-        run: echo "hello" > somefile.txt
-      - name: add pr comment
-        run: |-
-          gh auth login --with-token ${{ secrets.GITHUB_TOKEN }}
-          gh pr comment $GITHUB_PR_NUMBER --body "Hi from GitHub CLI"
+      - uses: raisultan/pr-commenter@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_NAME: "${{ github.repository }}"
+          ISSUE_NUMBER: "${{ github.event.issue.number }}"
+          COMMENT: |
+            ### Example comment
