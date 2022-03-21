@@ -13,5 +13,5 @@ jobs:
         run: echo "hello" > somefile.txt
       - name: add pr comment
         run: |-
-         gh auth login --with-token ${{ secrets.GITHUB_TOKEN }}
-         gh pr comment $GITHUB_PR_NUMBER --body "Hi from GitHub CLI"
+          gh auth login --with-token ${{ secrets.GITHUB_TOKEN }}
+          gh pr comment $GITHUB_PR_NUMBER --body "Hi from GitHub CLI"
