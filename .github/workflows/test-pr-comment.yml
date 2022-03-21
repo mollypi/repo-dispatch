@@ -1,0 +1,15 @@
+on:
+  pull_request
+  
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest  
+    env:
+      GITHUB_PR_NUMBER: ${{github.event.pull_request.number}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: create a file
+        run: echo "hello" > somefile.txt
+      - name: add pr comment
+        run: gh pr comment $GITHUB_PR_NUMBER --body "Hi from GitHub CLI"
