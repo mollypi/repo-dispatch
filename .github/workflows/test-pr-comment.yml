@@ -1,3 +1,5 @@
+
+   
 on:
   pull_request
   
@@ -6,10 +8,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: raisultan/pr-commenter@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO_NAME: "${{ github.repository }}"
-          ISSUE_NUMBER: "${{ github.event.issue.number }}"
-          COMMENT: |
-            ### Example comment
+    - uses: JoseThen/comment-pr@v1.1.1
+      with:
+        comment: 'This PR is the bees knees!'
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
