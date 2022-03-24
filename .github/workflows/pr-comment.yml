@@ -1,0 +1,40 @@
+name: comment pr
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  prcomment:
+    name: comment on pr
+    runs-on: ubuntu-latest
+    
+    env:
+      PR_NUMBER: ${{github.event.number}}
+      REPO: ${{github.repository}}
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      
+    steps:
+      - name: setup python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyGithub
+          
+      - name: get pr
+        shell: python
+        run: |-
+          import os
+          import re
+          from github import Github, Issue
+          tk = os.getenv('GITHUB_TOKEN')
+          pn = int(os.getenv('PR_NUMBER'))
+          gh = Github(tk)
+          rp = gh.get_repo(os.getenv('REPO'))
+          pr = rp.get_pull(pn)
+          gh_issue = rp.get_issue(pn)
+          gh_issue.create_comment("HI")
