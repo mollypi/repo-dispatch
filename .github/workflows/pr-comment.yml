@@ -15,6 +15,9 @@ jobs:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       
     steps:
+      - name: create a file with context
+        run: echo "something" > commentfile.txt
+        
       - name: setup python
         uses: actions/setup-python@v3
         with:
@@ -37,4 +40,7 @@ jobs:
           rp = gh.get_repo(os.getenv('REPO'))
           pr = rp.get_pull(pn)
           gh_issue = rp.get_issue(pn)
-          gh_issue.create_comment("HI")
+          with open("commentfile.txt","r") as fopen:
+            d = fopen.read()
+            
+          gh_issue.create_comment(d)
