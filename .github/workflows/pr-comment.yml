@@ -16,7 +16,9 @@ jobs:
       
     steps:
       - name: create a file with context
-        run: echo "something" > commentfile.txt
+        run: |- 
+          echo "something" > commentfile.txt
+          echo "anotherline" >> commentfile.txt
         
       - name: setup python
         uses: actions/setup-python@v3
