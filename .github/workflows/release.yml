@@ -23,8 +23,8 @@ jobs:
       - name: get latest tag
         run: |- 
           TAG=$(curl --silent  "${{env.TAG_URL}}" | \
-           jq '.[0].name')
+           jq --raw-output '.[0].name')
           echo "LAST_TAG=${LAST_TAG}" >> $GITHUB_ENV
 
       - name: debug
-        run: echo env.LAST_TAG
+        run: echo ${env.LAST_TAG}
