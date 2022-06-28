@@ -15,3 +15,6 @@ jobs:
         latest: true
         tarBall: true
         zipBall: true
+
+    - name: list 
+      run: ls
