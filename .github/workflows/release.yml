@@ -44,7 +44,7 @@ jobs:
       - name: create version file 
         run: |
           touch version
-          echo "${env.LAST_TAG}" >> version
+          echo "$env.LAST_TAG" >> version
 
           cat version
       
