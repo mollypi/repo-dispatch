@@ -1,14 +1,30 @@
-name: Release
-
+name: Release new CLI versions
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
+
+env:
+ TAG_URL: https://api.github.com/repos/mollypi/repo-dispatch/tags
+
 jobs:
-  release-please:
+  release-new-cli:
+    name: Release new CLI versions
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'write'
+      id-token: 'write'
+
     steps:
-      - uses: GoogleCloudPlatform/release-please-action@main
-        with:
-          release-type: php
-          package-name: asterisk-notation
+      - uses: actions/checkout@v3
+      
+
+      - name: get latest tag
+        run: |- 
+          TAG=$(curl --silent  "${{env.TAG_URL}}" | \
+           jq '.[0].name')
+          echo "LAST_TAG=${LAST_TAG}" >> $GITHUB_ENV
+
+      - name: debug
+        run: echo env.LAST_TAG
