@@ -28,7 +28,7 @@ jobs:
           echo "LAST_TAG=${TAG}" >> $GITHUB_ENV
 
       - name: debug
-        run: echo "$env.LAST_TAG"
+        run: echo $LAST_TAG
 
       - name: Create Release
         id: create_release
@@ -44,7 +44,7 @@ jobs:
       - name: create version file 
         run: |
           touch version
-          echo "$env.LAST_TAG" >> version
+          echo "$LAST_TAG" >> version
 
           cat version
       
