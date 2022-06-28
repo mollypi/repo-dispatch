@@ -1,0 +1,17 @@
+name: test by action cloudbuild
+on:
+  workflow_dispatch:
+    inputs:
+      appenv:
+        description: appenv var i.e staging, qa
+        required: true
+
+jobs:
+  downloadasset:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: robinraju/release-downloader@v1.4
+      with:
+        latest: true
+        tarBall: true
+        zipBall: true
