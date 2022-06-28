@@ -13,8 +13,7 @@ jobs:
     - uses: robinraju/release-downloader@v1.4
       with:
         latest: true
-        tarBall: true
-        zipBall: true
+        fileName: "*"
 
     - name: list 
       run: ls
