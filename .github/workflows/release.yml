@@ -6,6 +6,7 @@ on:
 
 env:
  TAG_URL: https://api.github.com/repos/mollypi/repo-dispatch/tags
+ RELEASE_URL: https://api.github.com/repos/mollypi/repo-dispatch/releases
 
 jobs:
   release-new-cli:
@@ -27,7 +28,7 @@ jobs:
           echo "LAST_TAG=${TAG}" >> $GITHUB_ENV
 
       - name: debug
-        run: echo env.LAST_TAG
+        run: echo $env.LAST_TAG
 
       - name: Create Release
         id: create_release
@@ -39,3 +40,29 @@ jobs:
           release_name: CLI Release ${{ env.LAST_TAG }}
           draft: false
           prerelease: false
+
+      - name: create version file 
+        run: |
+          touch version
+          echo $env.LAST_TAG >> version
+
+          cat version
+      
+      - name: create notes file 
+        run: |
+          touch notes.txt
+          NOTES=$(curl --silent  "${{env.RELEASE_URL}}" | \
+           jq --raw-output '.[0].body')
+          echo "${NOTES}" >> notes.txt
+
+          cat notes.txt
+
+
+
+
+
+      - uses: robinraju/release-downloader@v1.4
+        with:
+          latest: true
+          tarBall: true
+          zipBall: true
