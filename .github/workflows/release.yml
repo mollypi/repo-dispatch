@@ -18,6 +18,7 @@ jobs:
         uses: endaft/action-changelog@v0.0.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          config_file: .github/changelog-config.js
           exclude_types: other,doc,chore
 
       - name: Create release
